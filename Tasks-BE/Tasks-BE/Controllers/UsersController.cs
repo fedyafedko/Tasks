@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Tasks.BLL.Services.Interfaces;
 using Tasks.Common.DTOs;
-using Tasks.Common.DTOs.Task;
 using Tasks.Common.Responses;
 
 namespace Tasks_BE.Controllers

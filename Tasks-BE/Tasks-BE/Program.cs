@@ -20,6 +20,7 @@ using Tasks.BLL.Services.Interfaces;
 using Tasks.BLL.Services;
 using Tasks_BE.Validators.Auth;
 using FluentValidation.AspNetCore;
+using Tasks_BE.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -129,6 +130,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.MigrateDatabase();
 
 app.UseHttpsRedirection();
 app.UseCors(
