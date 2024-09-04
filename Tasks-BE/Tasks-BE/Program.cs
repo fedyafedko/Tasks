@@ -1,26 +1,26 @@
-using Microsoft.EntityFrameworkCore;
-using Tasks.DAL.EF;
-using Tasks.DAL.Repositories.Interfaces;
-using Tasks.DAL.Repositories;
-using Tasks_BE.Middlewares;
-using Tasks.Common.Extensions;
-using Tasks.Common.Configs;
-using Tasks.BLL.Profiles;
-using Microsoft.AspNetCore.Identity;
-using Tasks.Entities;
 using FluentValidation;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
-using Tasks_BE.Utility;
-using Tasks.BLL.Services.Interfaces;
+using System.Text;
+using Tasks.BLL.Profiles;
 using Tasks.BLL.Services;
-using Tasks_BE.Validators.Auth;
-using FluentValidation.AspNetCore;
+using Tasks.BLL.Services.Interfaces;
+using Tasks.Common.Configs;
+using Tasks.Common.Extensions;
+using Tasks.DAL.EF;
+using Tasks.DAL.Repositories;
+using Tasks.DAL.Repositories.Interfaces;
+using Tasks.Entities;
 using Tasks_BE.Extensions;
+using Tasks_BE.Middlewares;
+using Tasks_BE.Utility;
+using Tasks_BE.Validators.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +46,7 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
+builder.Services.AddScoped<IPaginationHelper, PaginationHelper>();
 
 // Identity
 builder.Services.AddIdentity<User, IdentityRole<Guid>>()

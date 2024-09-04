@@ -14,13 +14,16 @@ namespace Tasks.BLL.Services
     public class TaskService : ITaskService
     {
         private readonly IRepository<Entities.Task> _taskRepository;
+        private readonly IPaginationHelper _paginationHelper;
         private readonly IMapper _mapper;
 
         public TaskService(
             IRepository<Entities.Task> taskRepository,
+            IPaginationHelper paginationHelper,
             IMapper mapper)
         {
             _taskRepository = taskRepository;
+            _paginationHelper = paginationHelper;
             _mapper = mapper;
         }
 
@@ -84,9 +87,9 @@ namespace Tasks.BLL.Services
 
             var tasks = await query.ToListAsync();
 
-            var taskDTO = _mapper.Map<List<TaskDTO>>(tasks);
+            var tasksDTO = _mapper.Map<List<TaskDTO>>(tasks);
 
-            var paginationTasks = taskDTO.Pagination(request.Page, request.PageSize);
+            var paginationTasks = _paginationHelper.Apply(tasksDTO, request.Page, request.PageSize);
 
             return paginationTasks;
         }

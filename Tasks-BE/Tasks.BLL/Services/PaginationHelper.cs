@@ -1,10 +1,11 @@
-﻿using Tasks.Common.DTOs;
+﻿using Tasks.BLL.Services.Interfaces;
+using Tasks.Common.DTOs;
 
-namespace Tasks.Common.Extensions
+namespace Tasks.BLL.Services
 {
-    public static class PaginationExtension
+    public class PaginationHelper : IPaginationHelper
     {
-        public static PageList<T> Pagination<T>(this List<T> items, int page, int pageSize)
+        public PageList<T> Apply<T>(List<T> items, int page, int pageSize)
         {
             var pageUsers = items.Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
